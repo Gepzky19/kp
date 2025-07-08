@@ -17,7 +17,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4">
                 <div class="col">
                     <div class="card h-100">
-                        <img src="images/bahan/1.jpeg" class="card-img-top produk-img" alt="Produk 1">
+                        <img src="images/fabric/fabric3.jpeg" class="card-img-top produk-img" alt="Produk 1">
                         <div class="card-body text-center">
                             <h5 class="card-title">Produk</h5>
                         </div>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="images/man/hem-pndk-1/1.jpeg" class="card-img-top produk-img" alt="Man">
+                        <img src="images/pria/hempendek1.jpeg" class="card-img-top produk-img" alt="Man">
                         <div class="card-body text-center">
                             <h5 class="card-title">Man</h5>
                         </div>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="images/women/blouse/2.jpg" class="card-img-top produk-img" alt="Women">
+                        <img src="images/wanita/blouse7.jpg" class="card-img-top produk-img" alt="Women">
                         <div class="card-body text-center">
                             <h5 class="card-title">Women</h5>
                         </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="images/couple/couple3/4-2.png" class="card-img-top produk-img" alt="Couple">
+                        <img src="images/couple/couple1.jpeg" class="card-img-top produk-img" alt="Couple">
                         <div class="card-body text-center">
                             <h5 class="card-title">Couple</h5>
                         </div>
@@ -55,19 +55,23 @@
         </div>
     </section>
 
-    <!-- Tentang Section -->
     <!-- Tentang Perusahaan Section -->
-<section class="tentang-perusahaan py-5 px-3">
-    <div class="container">
+<section class="tentang-perusahaan py-5 px-3"
+ style="background-image: url('{{ asset('images/fabric/fabric15.jpeg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 500px; position: relative;">
+    <!-- Overlay gelap -->
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1;"></div>
+
+    <!-- Konten -->
+    <div class="container position-relative" style="z-index:2;">
         <div class="row align-items-center">
             <!-- Logo -->
             <div class="col-lg-4 text-center mb-4 mb-lg-0">
-                <img src="{{ asset('images/logo-iskandartex.png') }}" alt="Logo Iskandartex" class="img-fluid" style="max-width: 250px;">
-                <h4 class="mt-3 text-danger fw-bold">PT. ISKANDAR INDAH<br>PRINTING TEXTILE</h4>
+                <img src="{{ asset('images/logo/logo.png') }}" alt="Logo Iskandartex" class="img-fluid" style="max-width: 250px;">
+                <h4 class="mt-3 fw-bold" style="color:#d40000;">PT. ISKANDAR INDAH<br>PRINTING TEXTILE</h4>
             </div>
 
             <!-- Deskripsi -->
-            <div class="col-lg-8 text-white">
+            <div class="col-lg-8 text-white fw-bold">
                 <p>
                     Kecintaan keluarga terhadap tekstil berawal sejak bekerja di toko kain milik keluarga besar di Surabaya. 
                     Berbekal pengetahuan dan keterampilan yang dimiliki sebelumnya, kami mencoba mencari peluang yang lebih besar. 
@@ -86,6 +90,7 @@
 </section>
 
 
+
     <!-- Maps Section -->
     <section class="maps">
         <div class="maps-text">
@@ -93,7 +98,7 @@
             <p>Jl. Pakel No.11, Kerten...</p>
         </div>
         <div class="maps-gmaps">
-            <iframe src="https://www.google.com/maps/embed?..."></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15820.885869888005!2d110.77734015541996!3d-7.55081259999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a143d3307a769%3A0xdad24a22229749fd!2sBatik%20Iskandartex%20solo!5e0!3m2!1sid!2sid!4v1751965513056!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
 

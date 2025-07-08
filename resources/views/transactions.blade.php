@@ -5,17 +5,43 @@
     <title>Laporan Transaksi</title>
     <style>
         body { font-family: sans-serif; padding: 10px; }
-        .header { text-align: center; margin-bottom: 20px; }
-        .header h2 { margin: 5px 0; }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .header h2 {
+            margin: 5px 0;
+            color: #333;
+        }
+        .back-button {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            text-decoration: none;
+            color: #d40000;
+            padding: 4px 12px;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #e6f0ff;
+        }
         table { border-collapse: collapse; width: 100%; font-size: 12px; }
-        th { background-color: #007BFF; color: white; padding: 8px; border: 1px solid #555; }
+        th { background-color: #d40000; color: white; padding: 8px; border: 1px solid #555; }
         td { border: 1px solid #555; padding: 8px; vertical-align: top; }
         ul { margin: 0; padding-left: 20px; }
-        .total-footer { margin-top: 20px; text-align: right; font-weight: bold; }
+        .total-footer {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="header">
+        <a href="{{ url('/admin/dashboard') }}" class="back-button">&lt;</a>
         <img src="{{ $logo }}" alt="Logo Toko" style="height:80px;">
         <h2>Laporan Transaksi</h2>
         <p>{{ date('d-m-Y H:i') }}</p>
@@ -42,7 +68,6 @@
                     $kembalian = $tx->change ?? 0;
                     $grandTotal += $total;
 
-                    // Menangani produk double-encoded JSON
                     $productsRaw = $tx->products;
                     $products = [];
 
@@ -52,10 +77,8 @@
                         $decodedOnce = json_decode($productsRaw, true);
                         if (is_array($decodedOnce)) {
                             if (isset($decodedOnce[0]['name'])) {
-                                // Sudah array produk
                                 $products = $decodedOnce;
                             } elseif (is_string($decodedOnce)) {
-                                // Decode lagi jika ternyata string
                                 $products = json_decode($decodedOnce, true) ?? [];
                             }
                         }

@@ -22,7 +22,7 @@ ul li {
 ul li a {
   display: block;
   padding: 20px 30px;
-  color: #a65e1a;
+  color: #d40000;
   text-decoration: none;
   text-align: center;
   font-size: 18px;
@@ -158,7 +158,7 @@ body {
 
 /* Hero */
 .hero {
-  background-image: url('../images/bahan/bahan9.jpeg'); /* Ganti dengan path gambar kamu */
+  background-image: url('../images/fabric/fabric14.jpeg'); /* Ganti dengan path gambar kamu */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -298,7 +298,7 @@ body {
 /* Tentang & Kontak */
 .tentang {
   position: relative;
-  background-image: url('../images/bahan/bahan15.jpeg');
+  background-image: url('../images/fabric/fabric3.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -318,7 +318,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4); /* Ubah 0.4 sesuai tingkat kegelapan */
+  background-color: rgba(176, 19, 19, 0.4); /* Ubah 0.4 sesuai tingkat kegelapan */
   z-index: -1;
 }
 
@@ -393,67 +393,8 @@ footer {
   font-size: 1.3rem;
 }
 
-.login-btn {
-  padding: 8px 16px;
-  background-color: #d20000;
-  color: white;
-  border-radius: 4px;
-  transition: 0.3s ease;
-}
-
-.login-btn:hover {
-  background-color: #a80000;
-}
-
-.login-container {
-    width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff8f0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.login-container h2 {
-    margin-bottom: 20px;
-    color: #b76e2b;
-    text-align: center;
-}
-
-.login-container form div {
-    margin-bottom: 15px;
-}
-
-.login-container label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.login-container input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #b76e2b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.login-container button:hover {
-    background-color: #a65e1a;
-}
-
 .nav-menu .btn-login {
-  background-color: #d35400;
+  background-color: #d40000;
   color: white;
   padding: 8px 16px;
   border-radius: 5px;
@@ -462,7 +403,7 @@ footer {
 }
 
 .nav-menu .btn-login:hover {
-  background-color: #e67e22;
+  background-color: #9b0000;
 }
 
 .role-select-container {
