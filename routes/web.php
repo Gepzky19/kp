@@ -14,6 +14,40 @@ use App\Http\Controllers\KeranjangController;
 
 // Route untuk menampilkan halaman pembayaran
 // Route untuk menampilkan halaman pembayaran (GET)
+// Rute untuk halaman edit produk
+// Rute untuk memperbarui produk
+// Rute untuk halaman edit produk
+
+
+Route::get('/keranjang', [KeranjangController::class, 'showKeranjang'])->name('keranjang.show');
+
+// Rute untuk menghapus produk dari keranjang
+Route::get('/keranjang/remove/{id}', [KeranjangController::class, 'removeFromCart'])->name('keranjang.remove');
+
+// Rute untuk mengarahkan ke halaman pembayaran
+Route::post('/keranjang/payment', [KeranjangController::class, 'pembayaran'])->name('keranjang.pembayaran');
+Route::post('/keranjang/payment', [KeranjangController::class, 'pembayaran'])->name('keranjang.payment');
+
+
+Route::get('/admin/products/edit', [ProdukController::class, 'edit'])->name('admin.editProduct');
+
+
+Route::get('/admin/products/edit', [ProdukController::class, 'edit'])->name('admin.editProduct');
+
+Route::put('/admin/products/{id}', [ProdukController::class, 'update'])->name('admin.updateProduct');
+
+Route::get('/admin/products/{id}/edit', [ProdukController::class, 'edit'])->name('admin.editProduct');
+
+Route::get('/admin/dashboard', [ProdukController::class, 'index'])->name('admin.dashboard');
+
+Route::put('/admin/products/{id}', [ProdukController::class, 'update'])->name('admin.updateProduct');
+
+Route::put('/admin/products/{id}', [ProdukController::class, 'update'])->name('admin.updateProduct');
+
+
+Route::get('/admin/products/{id}/edit', [ProdukController::class, 'edit'])->name('admin.editProduct');
+Route::put('/admin/products/{id}', [ProdukController::class, 'update'])->name('admin.updateProduct');
+
 Route::post('/keranjang/pembayaran', [KeranjangController::class, 'pembayaran'])->name('keranjang.pembayaran');
 Route::get('/keranjang/pembayaran', [KeranjangController::class, 'showPembayaran'])->name('keranjang.showPembayaran');
 

@@ -12,6 +12,7 @@
         @foreach($products as $product)
         <div class="col-md-4">
             <div class="card">
+                <!-- Menampilkan gambar produk -->
                 <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $product->name }}</h5>
@@ -19,7 +20,7 @@
                     <p class="card-text">Harga: Rp {{ number_format($product->price, 0, ',', '.') }}</p>
                     <p class="card-text">Stok: {{ $product->stock }}</p>
                     
-                    <!-- Form untuk mengubah jumlah barang di keranjang -->
+                    <!-- Form untuk menambahkan produk ke keranjang -->
                     <form action="{{ route('cart.add') }}" method="POST">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">

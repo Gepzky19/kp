@@ -8,15 +8,14 @@
         <div class="col-md-6">
             <h3>Total Pembayaran: Rp{{ number_format($totalPrice, 0, ',', '.') }}</h3>
             
-            <form action="{{ route('keranjang.payment') }}" method="POST">
-    @csrf
-    <div class="form-group">
-        <label for="amount_paid">Jumlah Pembayaran:</label>
-        <input type="number" name="amount_paid" id="amount_paid" class="form-control" value="{{ old('amount_paid') }}" min="0" required>
-    </div>
-    <button type="submit" class="btn btn-success mt-3">Proses Pembayaran</button>
-</form>
-
+            <form action="{{ route('keranjang.pembayaran') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="amount_paid">Jumlah Pembayaran:</label>
+                    <input type="number" name="amount_paid" id="amount_paid" class="form-control" value="{{ old('amount_paid') }}" min="0" required>
+                </div>
+                <button type="submit" class="btn btn-success mt-3">Proses Pembayaran</button>
+            </form>
 
             <!-- Menampilkan Kembalian jika ada -->
             @if(isset($change))
