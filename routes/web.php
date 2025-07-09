@@ -48,6 +48,8 @@ Route::put('/admin/products/{id}', [ProdukController::class, 'update'])->name('a
 Route::get('/admin/products/{id}/edit', [ProdukController::class, 'edit'])->name('admin.editProduct');
 Route::put('/admin/products/{id}', [ProdukController::class, 'update'])->name('admin.updateProduct');
 
+Route::post('/admin/products', [ProdukController::class, 'store'])->name('admin.storeProduct');
+
 Route::post('/keranjang/pembayaran', [KeranjangController::class, 'pembayaran'])->name('keranjang.pembayaran');
 Route::get('/keranjang/pembayaran', [KeranjangController::class, 'showPembayaran'])->name('keranjang.showPembayaran');
 

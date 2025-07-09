@@ -11,7 +11,6 @@
             background-color: #faf6ef;
         }
 
-        /* Header: Tombol Kembali + Judul + Navbar */
         .edit-header-container {
             display: flex;
             justify-content: space-between;
@@ -101,28 +100,21 @@
             text-align: center;
         }
 
-        .product-card .image-placeholder {
+        .image-placeholder, .product-card img {
             width: 100%;
             height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .image-placeholder {
             background-color: #eee;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 8px;
             font-style: italic;
             color: #888;
-            margin-bottom: 15px;
-        }
-
-        .product-card strong {
-            font-size: 18px;
-            color: #222;
-        }
-
-        .product-card p {
-            margin: 6px 0;
-            font-size: 14px;
-            color: #444;
         }
 
         form {
@@ -160,6 +152,19 @@
         button:hover {
             background-color: #bb0000;
         }
+
+        /* Slide Animation */
+        .slide-toggle {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+
+        .slide-toggle.show {
+            max-height: 1000px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -170,7 +175,6 @@
         </div>
     @endif
 
-    <!-- Header dengan tombol kembali dan navbar -->
     <div class="edit-header-container">
         <div class="edit-title-group">
             <a href="{{ url('/admin/dashboard') }}" class="back-button">&lt;</a>
@@ -186,19 +190,70 @@
         </div>
     </div>
 
+    <!-- Tombol Toggle -->
+    <!-- Tombol Toggle (ukuran sejajar form input) -->
+    <div style="margin: 0 auto 20px; max-width: 500px;">
+        <button onclick="toggleForm()" style="width: 100%; padding: 10px 20px; font-size: 16px; background-color: #d40000; color: white; border: none; border-radius: 8px; cursor: pointer;">
+            ➕ Tambah Produk Baru
+        </button>
+    </div>
+
+
+    <!-- Form Tambah Produk (hidden) -->
+    <div id="addProductForm" class="product-card slide-toggle" style="max-width: 500px; margin: 0 auto;">
+        <form action="{{ route('admin.storeProduct') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <label>Nama Produk:</label>
+            <input type="text" name="name" required>
+
+            <label>Kategori:</label>
+            <select name="category" required>
+                <option value="man">Man</option>
+                <option value="women">Women</option>
+                <option value="couple">Couple</option>
+                <option value="sarung">Sarung</option>
+                <option value="bahan">Bahan</option>
+            </select>
+
+            <label>Harga:</label>
+            <input type="number" name="price" required>
+
+            <label>Stok:</label>
+            <input type="number" name="stock" required>
+
+            <label>Gambar Produk:</label>
+            <input type="file" name="image" accept="image/*" required>
+
+            <button type="submit">Tambah Produk</button>
+        </form>
+    </div>
+
     <h3>{{ ucfirst(request('category') ?? 'Semua') }}</h3>
 
     <div class="product-list">
         @foreach ($products as $product)
             <div class="product-card">
-                <div class="image-placeholder">Tidak ada gambar</div>
+                @php
+                    $imagePath = 'images/' . $product->image;
+                @endphp
+
+                @if($product->image && file_exists(public_path($imagePath)))
+                    <img src="{{ asset($imagePath) }}" alt="{{ $product->name }}">
+                @else
+                    <div class="image-placeholder">Tidak ada gambar</div>
+                @endif
+
                 <strong>{{ $product->name }}</strong>
                 <p><strong>Kategori:</strong> {{ $product->category }}</p>
                 <p><strong>Harga:</strong> Rp {{ number_format($product->price, 0, ',', '.') }}</p>
 
-                <form action="{{ route('admin.updateProduct', $product->id) }}" method="POST">
+                <form action="{{ route('admin.updateProduct', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
+                    <label>Nama Produk:</label>
+                    <input type="text" name="name" value="{{ $product->name }}" required>
 
                     <label>Kategori:</label>
                     <select name="category" required>
@@ -215,11 +270,21 @@
                     <label>Stok:</label>
                     <input type="number" name="stok" value="{{ $product->stock }}" required>
 
+                    <label>Ganti Gambar (opsional):</label>
+                    <input type="file" name="image" accept="image/*">
+
                     <button type="submit">Update Produk</button>
                 </form>
             </div>
         @endforeach
     </div>
+
+    <script>
+        function toggleForm() {
+            const form = document.getElementById('addProductForm');
+            form.classList.toggle('show');
+        }
+    </script>
 
 </body>
 </html>

@@ -25,7 +25,7 @@
             @forelse ($products as $product)
                 <div class="produk-card">
                     @if ($product->image)
-                        <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                        <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}">
                     @else
                         <div class="no-image">Tidak ada gambar</div>
                     @endif

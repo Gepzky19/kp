@@ -71,7 +71,7 @@
             </div>
 
             <!-- Deskripsi -->
-            <div class="col-lg-8 text-white fw-bold">
+            <div class="col-lg-8 text-white fw-semibold">
                 <p>
                     Kecintaan keluarga terhadap tekstil berawal sejak bekerja di toko kain milik keluarga besar di Surabaya. 
                     Berbekal pengetahuan dan keterampilan yang dimiliki sebelumnya, kami mencoba mencari peluang yang lebih besar. 
