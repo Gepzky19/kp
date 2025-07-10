@@ -13,7 +13,7 @@
 <body>
     <div class="navbar">
         <div class="logo">
-            <img src="images/logo/logo.png" alt="Logo" class="logo-img" />
+            <img src="{{ asset('images/logo/logo.png') }}" alt="Logo" class="logo-img" />
             <span>ISKANDARTEX</span>
         </div>
 
@@ -24,7 +24,7 @@
 
 
             <!-- Tombol Keranjang dengan jumlah item di session -->
-            <li><a href="{{ route('keranjang.show') }}" class="btn btn-primary">
+            <li><a href="{{ route('keranjang.show') }}" class="btn-keranjang">
                 Keranjang 
                 <span class="badge badge-pill badge-danger">
                     {{ count(session('keranjang', [])) }}

@@ -36,10 +36,8 @@
         }, $keranjang)), 0, ',', '.') }}</h3>
 
         <!-- Tombol Checkout -->
-        <form action="{{ route('keranjang.pembayaran') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-success mt-4">Checkout</button>
-        </form>
+<a href="{{ route('keranjang.showPembayaran') }}" class="btn btn-success mt-4">Checkout</a>
+
     </div>
 </div>
 @endsection

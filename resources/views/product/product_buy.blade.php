@@ -33,7 +33,7 @@
                         </div>
                         
                         <!-- Tombol Tambahkan ke Keranjang -->
-                        <button type="submit" class="btn btn-primary mt-3">Tambahkan ke Keranjang</button>
+                        <button type="submit" class="btn btn-keranjang mt-3">Tambahkan ke Keranjang</button>
                     </form>
                 </div>
             </div>

@@ -258,7 +258,7 @@ body {
 
 .produk-card p {
   font-size: 16px;
-  color: #a65e1a;
+  color: #d20000;
   font-weight: bold;
 }
 
@@ -535,4 +535,38 @@ body {
     text-align: center;
     width: 100%;
     color: #777;
+}
+
+.btn-keranjang {
+    background-color: #d40000;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.btn-keranjang:hover {
+    background-color: #a80000;
+    color: white !important; /* Pastikan hover tidak menjadi putih */
+    text-decoration: none;
+}
+
+a.btn-keranjang {
+    background-color: #d40000 !important;
+    color: white !important;
+    padding: 6px 12px;
+    margin-top: 5px;
+    border-radius: 6px;
+    text-decoration: none !important;
+    border: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+a.btn-keranjang:hover {
+    background-color: #a80000 !important;
+    color: white !important;
 }

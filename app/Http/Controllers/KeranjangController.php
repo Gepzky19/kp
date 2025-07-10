@@ -58,7 +58,18 @@ class KeranjangController extends Controller
         return redirect()->route('keranjang.show')->with('error', 'Produk tidak ditemukan di keranjang!');
     }
 
-    // Menampilkan halaman pembayaran dan memproses pembayaran
+    public function showPembayaran()
+{
+    $keranjang = session()->get('keranjang', []);
+    $totalPrice = 0;
+
+    foreach ($keranjang as $item) {
+        $totalPrice += $item['quantity'] * $item['price'];
+    }
+
+    return view('keranjang.pembayaran', compact('keranjang', 'totalPrice'));
+}
+
     // Menampilkan halaman pembayaran dan memproses pembayaran
 public function pembayaran(Request $request)
 {
@@ -94,11 +105,13 @@ public function pembayaran(Request $request)
 
             // Simpan transaksi ke database
             Transaction::create([
-                'user_id' => auth()->id(),  // Ambil id user yang login
+                'user_id' => auth()->id(),
                 'product_id' => $productId,
+                'name' => $product->name, // tambahkan ini
                 'quantity' => $item['quantity'],
                 'total_price' => $item['quantity'] * $product->price,
             ]);
+
         } else {
             // Jika stok tidak cukup, tampilkan pesan error
             return redirect()->route('keranjang.show')->with('error', 'Stok produk tidak cukup!');
