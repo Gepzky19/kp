@@ -38,10 +38,25 @@ class KeranjangController extends Controller
 
     // Menampilkan halaman keranjang
     public function showKeranjang()
-    {
-        $keranjang = session()->get('keranjang', []);  // Ambil data keranjang dari session
-        return view('keranjang.keranjang', compact('keranjang'));
+{
+    $keranjang = session()->get('keranjang', []);  // Ambil data keranjang dari session
+
+    // Ambil waktu kadaluarsa dari session
+    $expiryTime = session('payment_expiry');
+
+    // Cek apakah waktu kadaluarsa sudah lewat
+    if ($expiryTime && now()->greaterThan($expiryTime)) {
+        // Jika kadaluarsa, hapus keranjang dan waktu kadaluarsa dari session
+        session()->forget('keranjang');
+        session()->forget('payment_expiry');
+
+        // Menampilkan pesan bahwa waktu kadaluarsa sudah lewat
+        return redirect()->route('keranjang.show')->with('error', 'Waktu untuk menyelesaikan pembayaran telah kadaluarsa. Silakan tambahkan produk ke keranjang lagi.');
     }
+
+    return view('keranjang.keranjang', compact('keranjang'));
+}
+
 
     // Fungsi untuk menghapus produk dari keranjang
     public function removeFromCart($id)
@@ -58,22 +73,28 @@ class KeranjangController extends Controller
         return redirect()->route('keranjang.show')->with('error', 'Produk tidak ditemukan di keranjang!');
     }
 
-    public function showPembayaran()
+ public function showPembayaran()
 {
     $keranjang = session()->get('keranjang', []);
     $totalPrice = 0;
 
+    // Menghitung total harga pembelian
     foreach ($keranjang as $item) {
         $totalPrice += $item['quantity'] * $item['price'];
     }
 
-    return view('keranjang.pembayaran', compact('keranjang', 'totalPrice'));
+    // Set waktu kadaluarsa 3 jam dari waktu sekarang
+    $expiryTime = now()->addHours(10);  // 3 jam dari sekarang
+    session(['payment_expiry' => $expiryTime]);
+
+return view('keranjang.pembayaran', compact('totalPrice', 'expiryTime'));
 }
+
 
     // Menampilkan halaman pembayaran dan memproses pembayaran
 public function pembayaran(Request $request)
 {
-    $keranjang = session()->get('keranjang', []);  // Ambil keranjang dari session
+    $keranjang = session()->get('keranjang', []);
     $totalPrice = 0;
 
     // Menghitung total harga pembelian
@@ -102,27 +123,20 @@ public function pembayaran(Request $request)
             // Kurangi stok produk
             $product->stock -= $item['quantity'];
             $product->save();  // Simpan perubahan stok
-
-            // Simpan transaksi ke database
-            Transaction::create([
-                'user_id' => auth()->id(),
-                'product_id' => $productId,
-                'name' => $product->name, // tambahkan ini
-                'quantity' => $item['quantity'],
-                'total_price' => $item['quantity'] * $product->price,
-            ]);
-
         } else {
-            // Jika stok tidak cukup, tampilkan pesan error
             return redirect()->route('keranjang.show')->with('error', 'Stok produk tidak cukup!');
         }
     }
 
+    // Menyimpan status pembayaran dalam session
+    session(['payment_status' => 'paid']);
+
     // Hapus keranjang setelah transaksi selesai
     session()->forget('keranjang');
 
-    // Tampilkan halaman pembayaran dengan kembalian
-    return view('keranjang.pembayaran', compact('totalPrice', 'amountPaid', 'change'));
+    // Kirim pesan sukses
+    return redirect()->route('keranjang.showPembayaran')->with('success', 'Pembayaran berhasil! Kembalian Anda sebesar: Rp' . number_format($change, 0, ',', '.'));
 }
+
 
 }

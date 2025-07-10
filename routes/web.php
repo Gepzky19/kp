@@ -58,11 +58,13 @@ Route::prefix('admin')->group(function () {
 | Produk Admin
 |--------------------------------------------------------------------------
 */
-Route::get('/admin/products/{id}/edit', [ProdukController::class, 'edit'])->name('admin.editProduct');
+Route::get('/admin/products/edit', [ProdukController::class, 'edit'])->name('admin.editProduct');
 Route::put('/admin/products/{id}', [ProdukController::class, 'update'])->name('admin.updateProduct');
 Route::post('/admin/products', [ProdukController::class, 'store'])->name('admin.storeProduct');
 Route::get('/admin/dashboard', [ProdukController::class, 'index'])->name('admin.dashboard');
-
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');
 /*
 |--------------------------------------------------------------------------
 | User Section
@@ -76,6 +78,8 @@ Route::prefix('user')->group(function () {
     Route::get('/login', [UserAuthController::class, 'showLogin'])->name('show.login');
     Route::post('/login', [UserAuthController::class, 'login'])->name('user.login');
 });
+ Route::get('/register', [UserAuthController::class, 'showRegister'])->name('user.register');  // Tambahkan ini
+    Route::post('/register', [UserAuthController::class, 'register']);  // Tambahkan ini
 
 /*
 |--------------------------------------------------------------------------

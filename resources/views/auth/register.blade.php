@@ -46,7 +46,7 @@
 
 
             <x-primary-button class="ml-4">
-                {{ __('Register') }}
+                {{ __('register') }}
             </x-primary-button>
         </div>
     </form>

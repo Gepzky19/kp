@@ -1,6 +1,4 @@
 <?php
-// File: app/Models/Transaction.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,13 +13,13 @@ class Transaction extends Model
     ];
 
     protected $casts = [
-        'products' => 'array',
+        'products' => 'array', // Mengubah data produk menjadi array
         'paid_at' => 'datetime',
     ];
-    
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 }
+

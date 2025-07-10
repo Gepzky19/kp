@@ -10,15 +10,15 @@
 
     <div class="row">
         @foreach($products as $product)
-        <div class="col-md-4">
-            <div class="card">
-                <!-- Menampilkan gambar produk -->
-                <img src="{{ asset('images/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $product->name }}</h5>
-                    <p class="card-text">{{ $product->description }}</p>
-                    <p class="card-text">Harga: Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                    <p class="card-text">Stok: {{ $product->stock }}</p>
+        <div class="col-md-3 mb-4"> <!-- Menyesuaikan ukuran kolom -->
+            <div class="card" style="height: 100%;">
+                <!-- Menampilkan gambar produk dengan ukuran yang lebih kecil -->
+                <img src="{{ asset('images/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body" style="height: 250px;"> <!-- Menyesuaikan tinggi card -->
+                    <h5 class="card-title" style="font-size: 1.1em;">{{ $product->name }}</h5>
+                    <p class="card-text" style="font-size: 0.9em;">{{ $product->description }}</p>
+                    <p class="card-text" style="font-size: 1em;">Harga: Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                    <p class="card-text" style="font-size: 0.9em;">Stok: {{ $product->stock }}</p>
                     
                     <!-- Form untuk menambahkan produk ke keranjang -->
                     <form action="{{ route('cart.add') }}" method="POST">
