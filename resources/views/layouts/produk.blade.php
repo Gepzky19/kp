@@ -18,20 +18,26 @@
         </div>
 
         <ul class="nav-menu">
-            <!-- Ganti 'Beranda' dengan 'Keranjang' -->
-            <!-- Ganti 'Keranjang' dengan 'Produk' -->
-<li><a href="{{ route('produk.index') }}">Produk</a></li>
+            <!-- Link ke halaman produk -->
+            <li><a href="{{ route('produk.index') }}">Produk</a></li>
 
+            <!-- Link ke halaman keranjang -->
+            <li>
+                <a href="{{ route('keranjang.show') }}" class="btn-keranjang">
+                    Keranjang 
+                    <span class="badge badge-pill badge-danger">
+                        {{ count(session('keranjang', [])) }}
+                    </span>
+                </a>
+            </li>
 
-            <!-- Tombol Keranjang dengan jumlah item di session -->
-            <li><a href="{{ route('keranjang.show') }}" class="btn-keranjang">
-                Keranjang 
-                <span class="badge badge-pill badge-danger">
-                    {{ count(session('keranjang', [])) }}
-                </span>
-            </a></li>
-
-            
+            <!-- Tombol logout -->
+            <li>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger ms-3">Logout</button>
+                </form>
+            </li>
         </ul>
     </div>
 

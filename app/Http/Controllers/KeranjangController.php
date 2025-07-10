@@ -116,26 +116,35 @@ public function pembayaran(Request $request)
 
     // Proses pembayaran dan update stok
     foreach ($keranjang as $productId => $item) {
-        $product = Product::find($productId);  // Ambil data produk
+        $product = Product::find($productId);
 
-        // Pastikan stok cukup sebelum diproses
         if ($product && $product->stock >= $item['quantity']) {
-            // Kurangi stok produk
             $product->stock -= $item['quantity'];
-            $product->save();  // Simpan perubahan stok
+            $product->save();
         } else {
             return redirect()->route('keranjang.show')->with('error', 'Stok produk tidak cukup!');
         }
     }
 
-    // Menyimpan status pembayaran dalam session
+    // Simpan transaksi ke tabel 'transactions'
+    $transaction = new Transaction();
+    $transaction->user_id = auth()->check() ? auth()->id() : null; // Bisa null kalau belum login
+    $transaction->name = $request->input('name') ?? (auth()->user()->name ?? 'Guest');
+    $transaction->products = json_encode($keranjang); // Simpan semua isi keranjang dalam bentuk JSON
+    $transaction->total_price = $totalPrice;
+    $transaction->amount_paid = $amountPaid;
+    $transaction->change = $change;
+    $transaction->paid_at = now();
+    $transaction->created_at = now();
+    $transaction->updated_at = now();
+    $transaction->save();
+
+    // Sukses: hapus keranjang dan simpan status
+    session()->forget('keranjang');
     session(['payment_status' => 'paid']);
 
-    // Hapus keranjang setelah transaksi selesai
-    session()->forget('keranjang');
-
-    // Kirim pesan sukses
-    return redirect()->route('keranjang.showPembayaran')->with('success', 'Pembayaran berhasil! Kembalian Anda sebesar: Rp' . number_format($change, 0, ',', '.'));
+    return redirect()->route('keranjang.showPembayaran')
+        ->with('success', 'Pembayaran berhasil! Kembalian Anda sebesar: Rp' . number_format($change, 0, ',', '.'));
 }
 
 
